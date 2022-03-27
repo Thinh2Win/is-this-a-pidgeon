@@ -4,13 +4,15 @@ import '@tensorflow/tfjs-backend-webgl';
 import ModelLoadState from './components/ModelLoadState.jsx';
 import IsPidgeon from './components/IsPidgeon.jsx';
 import BirdList from './components/BirdList.jsx';
+import sampleData from './sampleData.js';
 
 class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       model: null,
-      imgUrl: null
+      imgUrl: null,
+      sampleData: sampleData,
     };
     this.imgRef = React.createRef();
   }
@@ -48,7 +50,7 @@ class App extends React.Component {
           </div>
         </div>
         <div className="content">
-          <IsPidgeon model={this.state.model}/>
+          <IsPidgeon model={this.state.model} sampleData={this.state.sampleData}/>
           <BirdList />
         </div>
       </div>
