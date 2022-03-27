@@ -51,7 +51,7 @@ class IsPidgeon extends React.Component {
               className="img"
             />
           </div>
-          <button onClick={() => this.isPidgeonTest(this.imgRef)}>
+          <button onClick={() => {this.isPidgeonTest(this.imgRef), this.props.handleTestedBirds(this.state.imgUrl)}}>
             Test
           </button>
       </div>

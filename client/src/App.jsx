@@ -12,9 +12,11 @@ class App extends React.Component {
     this.state = {
       model: null,
       imgUrl: null,
-      sampleData: sampleData,
+      sampleData: [],
+      testedBirds: [],
     };
     this.imgRef = React.createRef();
+    this.handleTestedBirds = this.handleTestedBirds.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +29,15 @@ class App extends React.Component {
 
   pageRouter(){
 
+  }
+
+  handleTestedBirds(testedBirdsUrl) {
+    sampleData.forEach(bird => {
+      if (bird.url === testedBirdsUrl) {
+        this.state.testedBirds.push(bird);
+      }
+    })
+    this.setState({sampleData: this.state.testedBirds});
   }
 
   render () {
@@ -50,8 +61,11 @@ class App extends React.Component {
           </div>
         </div>
         <div className="content">
-          <IsPidgeon model={this.state.model} sampleData={this.state.sampleData}/>
-          <BirdList />
+          <IsPidgeon model={this.state.model}
+          sampleData={this.state.sampleData}
+          handleTestedBirds={this.handleTestedBirds}
+          />
+          <BirdList sampleData={this.state.sampleData}/>
         </div>
       </div>
 
