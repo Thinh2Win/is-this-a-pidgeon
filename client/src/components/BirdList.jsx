@@ -12,7 +12,7 @@ class BirdList extends React.Component {
   }
 
   render(){
-    {var renderBirds = this.props.sampleData.map(bird => {
+    {var renderBirds = this.props.testedBirds.map(bird => {
       return <div className="bird-list" key={bird.name}>
       <div className="entry">
       <div className="entry-image-wrapper">

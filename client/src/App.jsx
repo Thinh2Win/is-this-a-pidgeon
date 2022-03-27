@@ -12,11 +12,13 @@ class App extends React.Component {
     this.state = {
       model: null,
       imgUrl: null,
-      sampleData: [],
+      showView: 'Pidgeon Tester',
       testedBirds: [],
+      birdHolder: [],
     };
     this.imgRef = React.createRef();
     this.handleTestedBirds = this.handleTestedBirds.bind(this);
+    this.handleViewClick = this.handleViewClick.bind(this);
   }
 
   componentDidMount() {
@@ -34,12 +36,15 @@ class App extends React.Component {
   handleTestedBirds(testedBirdsUrl) {
     sampleData.forEach(bird => {
       if (bird.url === testedBirdsUrl) {
-        this.state.testedBirds.push(bird);
+        this.state.birdHolder.push(bird);
       }
     })
-    this.setState({sampleData: this.state.testedBirds});
+    this.setState({testedBirds: this.state.birdHolder});
   }
 
+  handleViewClick(viewName) {
+    this.setState({showView: viewName})
+  }
   render () {
     return (
       <div>
@@ -51,21 +56,25 @@ class App extends React.Component {
               <h3>Is this a Pidgeon?</h3>
               <ModelLoadState model={this.state.model}/>
             </span>
-            <span className="nav-button">
+            <span className="nav-button" onClick={()=> this.handleViewClick('Pidgeon Tester')}>
               Pidgeon Tester
             </span>
-            <span className="nav-button">
+            <span className="nav-button" onClick={()=> this.handleViewClick('Show Birds')}>
               Show me my Birds
             </span>
           </span>
           </div>
         </div>
         <div className="content">
-          <IsPidgeon model={this.state.model}
-          sampleData={this.state.sampleData}
-          handleTestedBirds={this.handleTestedBirds}
-          />
-          <BirdList sampleData={this.state.sampleData}/>
+          {this.state.showView === 'Pidgeon Tester' ? (
+            <IsPidgeon model={this.state.model}
+            sampleData={this.state.sampleData}
+            handleTestedBirds={this.handleTestedBirds}
+            />
+            ) : (
+              <BirdList testedBirds={this.state.testedBirds}/>
+          )
+          }
         </div>
       </div>
 
